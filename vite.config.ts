@@ -3,5 +3,5 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/eval-viewer/', // must match your GitHub repo name
+  base: '/json-eval-viewer/', // must match your GitHub repo name
 })
