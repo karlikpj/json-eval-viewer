@@ -146,7 +146,7 @@ export default function CaseDetail({ c }: { c: TestCase }) {
               const barCls = pct >= 90 ? styles.barHigh : pct >= 60 ? styles.barMid : styles.barLow
               return (
                 <tr key={m.name} className={m.success ? '' : styles.diffRow}>
-                  <td style={{ fontSize: '0.78rem' }}>{m.name}</td>
+                  <td style={{ fontSize: '0.78rem' }}>{m.name.match(/\[([^\]]+)\]/)?.[1]}</td>
                   <td><span className={`${styles.tag} ${m.success ? styles.tagPass : styles.tagFail}`}>
                     {m.success ? '✓ Pass' : '✗ Fail'}
                   </span></td>
