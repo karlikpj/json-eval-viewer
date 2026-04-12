@@ -29,7 +29,7 @@ export default function Viewer({ data, onReset }: Props) {
   return (
     <div className={styles.shell}>
       <header className={styles.header}>
-        <h1 className={styles.title}>📊 {data.testFile || 'Eval Results'}</h1>
+        <h1 className={styles.title}>{data.testFile || 'Eval Results'}</h1>
         <span className={`${styles.badge} ${styles.pass}`}>✓ {passCount} passed</span>
         <span className={`${styles.badge} ${styles.fail}`}>✗ {failCount} failed</span>
         <span className={styles.badge}>{data.testCases.length} total</span>
