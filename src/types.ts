@@ -1,3 +1,11 @@
+export type JsonPrimitive = boolean | number | string | null
+
+export interface JsonObject {
+  [key: string]: JsonValue | undefined
+}
+
+export type JsonValue = JsonPrimitive | JsonObject | JsonValue[]
+
 export interface Metric {
   name: string
   success: boolean

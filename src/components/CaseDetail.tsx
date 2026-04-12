@@ -1,18 +1,26 @@
-import { TestCase } from '../types'
+import type { JsonObject, JsonValue, TestCase } from '../types'
 import styles from './CaseDetail.module.css'
+import { getPath, isJsonObject, parseJsonObject } from '../utils/json'
 
-function getPath(obj: any, path: string): any {
-  return path.split('.').reduce((o, k) => o?.[k], obj)
-}
-function valStr(v: any): string {
+function valStr(v: JsonValue | undefined): string {
   if (v === null || v === undefined) return '—'
-  if (Array.isArray(v)) return v.join(', ')
+  if (Array.isArray(v)) return v.map(itemToString).join(', ')
+  if (isJsonObject(v)) return JSON.stringify(v)
   return String(v)
 }
-function codeCell(v: any) {
+function codeCell(v: JsonValue | undefined) {
   if (v === null || v === undefined) return <span style={{ color: '#94a3b8' }}>—</span>
   const s = typeof v === 'object' ? JSON.stringify(v, null, 2) : String(v)
   return <div className={styles.code}>{s}</div>
+}
+
+function itemToString(value: JsonValue): string {
+  return typeof value === 'object' ? JSON.stringify(value) : String(value)
+}
+
+function getPrimaryEndpoints(value: JsonObject): JsonObject[] {
+  const endpoints = getPath(value, 'pico_elements.outcomes.primary_endpoints')
+  return Array.isArray(endpoints) ? endpoints.filter(isJsonObject) : []
 }
 
 const TOP_FIELDS: [string, string][] = [
@@ -33,13 +41,12 @@ const EP_FIELDS = ['text','category','results','confidence_interval','p_value']
   .map(f => ['primary_endpoint_' + f, f] as [string, string])
 
 export default function CaseDetail({ c }: { c: TestCase }) {
-  let actual: any = {}, expected: any = {}
-  try { actual = JSON.parse(c.actualOutput) } catch {}
-  try { expected = JSON.parse(c.expectedOutput) } catch {}
+  const actual = parseJsonObject(c.actualOutput)
+  const expected = parseJsonObject(c.expectedOutput)
 
-  const aEPs: any[] = actual?.pico_elements?.outcomes?.primary_endpoints
-  const eEPs: any[] = expected?.pico_elements?.outcomes?.primary_endpoints
-  const len = Math.max((aEPs||[]).length, (eEPs||[]).length)
+  const aEPs = getPrimaryEndpoints(actual)
+  const eEPs = getPrimaryEndpoints(expected)
+  const len = Math.max(aEPs.length, eEPs.length)
 
   return (
     <div>
@@ -92,11 +99,11 @@ export default function CaseDetail({ c }: { c: TestCase }) {
           <tbody>
             {len === 0
               ? <tr><td colSpan={5} style={{ color: '#94a3b8' }}>
-                  Actual: {valStr(aEPs)} | Expected: {valStr(eEPs)}
+                  Actual: {valStr(getPath(actual, 'pico_elements.outcomes.primary_endpoints'))} | Expected: {valStr(getPath(expected, 'pico_elements.outcomes.primary_endpoints'))}
                 </td></tr>
               : Array.from({ length: len }, (_, i) => {
-                  const a = aEPs?.[i] ?? {}
-                  const e = eEPs?.[i] ?? {}
+                  const a = aEPs[i] ?? {}
+                  const e = eEPs[i] ?? {}
                   return EP_FIELDS.map(([field, label], fi) => {
                     const av = a[field] ?? '—', ev = e[field] ?? '—'
                     const match = av === ev
@@ -122,8 +129,8 @@ export default function CaseDetail({ c }: { c: TestCase }) {
         <table className={styles.table}>
           <thead><tr><th>Actual</th><th>Expected</th></tr></thead>
           <tbody><tr>
-            <td>{codeCell(actual?.pico_elements?.outcomes?.secondary_endpoints)}</td>
-            <td>{codeCell(expected?.pico_elements?.outcomes?.secondary_endpoints)}</td>
+            <td>{codeCell(getPath(actual, 'pico_elements.outcomes.secondary_endpoints'))}</td>
+            <td>{codeCell(getPath(expected, 'pico_elements.outcomes.secondary_endpoints'))}</td>
           </tr></tbody>
         </table>
       </div>

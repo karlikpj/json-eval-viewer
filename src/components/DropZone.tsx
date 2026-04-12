@@ -15,7 +15,7 @@ export default function DropZone({ onFile, loading, error }: Props) {
 
   return (
     <div className={styles.page}>
-      <h1 className={styles.title}>📊 Eval Results Viewer</h1>
+      <h1 className={styles.title}>JSON Eval Results Viewer</h1>
       <p className={styles.sub}>Drop your JSON test-run file to browse results interactively.</p>
 
       <div

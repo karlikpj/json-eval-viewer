@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { TestRun, TestCase } from '../types'
+import type  { TestRun } from '../types'
 import CaseDetail from './CaseDetail'
 import styles from './Viewer.module.css'
 
