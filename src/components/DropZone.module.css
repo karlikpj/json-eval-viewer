@@ -1,0 +1,51 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px;
+  background: #f0f2f5;
+}
+.title { font-size: 1.5rem; color: #1e293b; }
+.sub { color: #64748b; font-size: 0.95rem; }
+.box {
+  border: 2px dashed #94a3b8;
+  border-radius: 12px;
+  padding: 48px 64px;
+  cursor: pointer;
+  background: #fff;
+  text-align: center;
+  transition: all 0.2s;
+  min-width: 320px;
+}
+.box:hover, .drag { border-color: #1e293b !important; background: #f8fafc !important; }
+.icon { font-size: 3rem; margin-bottom: 12px; }
+.btn {
+  margin-top: 12px;
+  padding: 10px 24px;
+  background: #1e293b;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.btn:hover { background: #334155; }
+.error { color: #dc2626; font-size: 0.9rem; }
+
+.loading { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.loading p { color: #475569; font-size: 0.88rem; }
+.dots { display: flex; gap: 6px; }
+.dots span {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #1e293b;
+  animation: bounce 1.2s infinite ease-in-out;
+}
+.dots span:nth-child(2) { animation-delay: 0.2s; }
+.dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+  40%           { transform: translateY(-8px); opacity: 1; }
+}

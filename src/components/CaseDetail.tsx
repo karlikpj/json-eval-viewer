@@ -1,0 +1,163 @@
+import { TestCase } from '../types'
+import styles from './CaseDetail.module.css'
+
+function getPath(obj: any, path: string): any {
+  return path.split('.').reduce((o, k) => o?.[k], obj)
+}
+function valStr(v: any): string {
+  if (v === null || v === undefined) return '—'
+  if (Array.isArray(v)) return v.join(', ')
+  return String(v)
+}
+function codeCell(v: any) {
+  if (v === null || v === undefined) return <span style={{ color: '#94a3b8' }}>—</span>
+  const s = typeof v === 'object' ? JSON.stringify(v, null, 2) : String(v)
+  return <div className={styles.code}>{s}</div>
+}
+
+const TOP_FIELDS: [string, string][] = [
+  ['study_design.design_type',                        'Design Type'],
+  ['study_design.multicenter',                        'Multicenter'],
+  ['study_design.prospective',                        'Prospective'],
+  ['study_design.trial_phase',                        'Trial Phase'],
+  ['pico_elements.population.cancer_type',            'Cancer Type'],
+  ['pico_elements.population.cancer_stage',           'Cancer Stage'],
+  ['pico_elements.population.age_group',              'Age Group'],
+  ['pico_elements.population.sample_size',            'Sample Size'],
+  ['pico_elements.intervention.primary_intervention', 'Intervention'],
+  ['pico_elements.intervention.intervention_type',    'Intervention Type'],
+  ['extraction_confidence.overall_confidence',        'Confidence'],
+]
+
+const EP_FIELDS = ['text','category','results','confidence_interval','p_value']
+  .map(f => ['primary_endpoint_' + f, f] as [string, string])
+
+export default function CaseDetail({ c }: { c: TestCase }) {
+  let actual: any = {}, expected: any = {}
+  try { actual = JSON.parse(c.actualOutput) } catch {}
+  try { expected = JSON.parse(c.expectedOutput) } catch {}
+
+  const aEPs: any[] = actual?.pico_elements?.outcomes?.primary_endpoints
+  const eEPs: any[] = expected?.pico_elements?.outcomes?.primary_endpoints
+  const len = Math.max((aEPs||[]).length, (eEPs||[]).length)
+
+  return (
+    <div>
+      {/* header */}
+      <div className={styles.section}>
+        <h2 className={styles.sectionTitle}>Case</h2>
+        <table className={styles.table}>
+          <thead><tr><th>Name</th><th>Result</th><th>Duration</th></tr></thead>
+          <tbody><tr>
+            <td style={{ fontSize: '0.78rem', color: '#475569' }}>{c.name}</td>
+            <td><span className={`${styles.tag} ${c.success ? styles.tagPass : styles.tagFail}`}>
+              {c.success ? '✓ Pass' : '✗ Fail'}
+            </span></td>
+            <td>{c.runDuration.toFixed(2)}s</td>
+          </tr></tbody>
+        </table>
+      </div>
+
+      {/* field comparison */}
+      <div className={styles.section}>
+        <h2 className={styles.sectionTitle}>Field Comparison — Actual vs Expected</h2>
+        <table className={styles.table}>
+          <thead><tr><th>Field</th><th>Actual</th><th>Expected</th><th></th></tr></thead>
+          <tbody>
+            {TOP_FIELDS.map(([path, label]) => {
+              const av = valStr(getPath(actual, path))
+              const ev = valStr(getPath(expected, path))
+              const match = av === ev
+              return (
+                <tr key={path} className={match ? '' : styles.diffRow}>
+                  <td style={{ fontWeight: 500, whiteSpace: 'nowrap' }}>{label}</td>
+                  <td>{av}</td>
+                  <td>{ev}</td>
+                  <td>{match
+                    ? <span className={styles.ok}>✓</span>
+                    : <span className={styles.bad}>✗</span>}
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      {/* primary endpoints */}
+      <div className={styles.section}>
+        <h2 className={styles.sectionTitle}>Primary Endpoints</h2>
+        <table className={styles.table}>
+          <thead><tr><th>#</th><th>Field</th><th>Actual</th><th>Expected</th><th></th></tr></thead>
+          <tbody>
+            {len === 0
+              ? <tr><td colSpan={5} style={{ color: '#94a3b8' }}>
+                  Actual: {valStr(aEPs)} | Expected: {valStr(eEPs)}
+                </td></tr>
+              : Array.from({ length: len }, (_, i) => {
+                  const a = aEPs?.[i] ?? {}
+                  const e = eEPs?.[i] ?? {}
+                  return EP_FIELDS.map(([field, label], fi) => {
+                    const av = a[field] ?? '—', ev = e[field] ?? '—'
+                    const match = av === ev
+                    return (
+                      <tr key={`${i}-${field}`} className={match ? '' : styles.diffRow}>
+                        {fi === 0 && <td rowSpan={EP_FIELDS.length} style={{ fontWeight: 700, verticalAlign: 'top' }}>{i + 1}</td>}
+                        <td style={{ fontSize: '0.75rem', color: '#64748b', whiteSpace: 'nowrap' }}>{label}</td>
+                        <td>{codeCell(av)}</td>
+                        <td>{codeCell(ev)}</td>
+                        <td>{match ? <span className={styles.ok}>✓</span> : <span className={styles.bad}>✗</span>}</td>
+                      </tr>
+                    )
+                  })
+                })
+            }
+          </tbody>
+        </table>
+      </div>
+
+      {/* secondary endpoints */}
+      <div className={styles.section}>
+        <h2 className={styles.sectionTitle}>Secondary Endpoints</h2>
+        <table className={styles.table}>
+          <thead><tr><th>Actual</th><th>Expected</th></tr></thead>
+          <tbody><tr>
+            <td>{codeCell(actual?.pico_elements?.outcomes?.secondary_endpoints)}</td>
+            <td>{codeCell(expected?.pico_elements?.outcomes?.secondary_endpoints)}</td>
+          </tr></tbody>
+        </table>
+      </div>
+
+      {/* metrics */}
+      <div className={styles.section}>
+        <h2 className={styles.sectionTitle}>Metrics Detail</h2>
+        <table className={styles.table}>
+          <thead><tr><th>Metric</th><th>Result</th><th>Score</th><th>Reason</th></tr></thead>
+          <tbody>
+            {c.metricsData.map(m => {
+              const pct = Math.round((m.score ?? 0) * 100)
+              const barCls = pct >= 90 ? styles.barHigh : pct >= 60 ? styles.barMid : styles.barLow
+              return (
+                <tr key={m.name} className={m.success ? '' : styles.diffRow}>
+                  <td style={{ fontSize: '0.78rem' }}>{m.name}</td>
+                  <td><span className={`${styles.tag} ${m.success ? styles.tagPass : styles.tagFail}`}>
+                    {m.success ? '✓ Pass' : '✗ Fail'}
+                  </span></td>
+                  <td>
+                    <div className={styles.scoreBar}>
+                      <div className={styles.barBg}>
+                        <div className={`${styles.barFill} ${barCls}`} style={{ width: `${pct}%` }} />
+                      </div>
+                      <span style={{ fontSize: '0.78rem' }}>{pct}%</span>
+                    </div>
+                  </td>
+                  <td style={{ fontSize: '0.76rem', color: '#475569', maxWidth: 280 }}>{m.reason || '—'}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )
+}
