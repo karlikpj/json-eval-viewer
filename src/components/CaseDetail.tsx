@@ -37,8 +37,13 @@ const TOP_FIELDS: [string, string][] = [
   ['extraction_confidence.overall_confidence',        'Confidence'],
 ]
 
-const EP_FIELDS = ['text','category','results','confidence_interval','p_value']
-  .map(f => ['primary_endpoint_' + f, f] as [string, string])
+const EP_FIELDS: [string, string][] = [
+  ['primary_endpoint_text', 'Text'],
+  ['primary_endpoint_category', 'Category'],
+  ['primary_endpoint_results', 'Results'],
+  ['statistical_significance_assessment', 'Statistical Significance Assessment'],
+  ['statistical_significance_assessment_reason', 'Statistical Significance Assessment Reason'],
+]
 
 export default function CaseDetail({ c }: { c: TestCase }) {
   const actual = parseJsonObject(c.actualOutput)
