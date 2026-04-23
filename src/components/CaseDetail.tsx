@@ -52,6 +52,10 @@ export default function CaseDetail({ c }: { c: TestCase }) {
   const aEPs = getPrimaryEndpoints(actual)
   const eEPs = getPrimaryEndpoints(expected)
   const len = Math.max(aEPs.length, eEPs.length)
+  const actualStudyConclusions = getPath(actual, 'pico_elements.outcomes.study_conclusions')
+  const expectedStudyConclusions = getPath(expected, 'pico_elements.outcomes.study_conclusions')
+  const studyConclusionsMatch =
+    valStr(actualStudyConclusions) === valStr(expectedStudyConclusions)
 
   return (
     <div>
@@ -136,6 +140,22 @@ export default function CaseDetail({ c }: { c: TestCase }) {
           <tbody><tr>
             <td>{codeCell(getPath(actual, 'pico_elements.outcomes.secondary_endpoints'))}</td>
             <td>{codeCell(getPath(expected, 'pico_elements.outcomes.secondary_endpoints'))}</td>
+          </tr></tbody>
+        </table>
+      </div>
+
+      {/* study conclusions */}
+      <div className={styles.section}>
+        <h2 className={styles.sectionTitle}>Study Conclusions</h2>
+        <table className={styles.table}>
+          <thead><tr><th>Actual</th><th>Expected</th><th></th></tr></thead>
+          <tbody><tr className={studyConclusionsMatch ? '' : styles.diffRow}>
+            <td>{codeCell(actualStudyConclusions)}</td>
+            <td>{codeCell(expectedStudyConclusions)}</td>
+            <td>{studyConclusionsMatch
+              ? <span className={styles.ok}>✓</span>
+              : <span className={styles.bad}>✗</span>}
+            </td>
           </tr></tbody>
         </table>
       </div>
