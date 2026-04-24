@@ -30,3 +30,17 @@ export interface TestRun {
   testPassed: number
   testFailed: number
 }
+
+export interface ConclusionRecord {
+  id: string
+  studyConclusions: string
+  conclusionCategoryLabel: string
+}
+
+export interface ConclusionSummary {
+  evaluatedCount: number
+  rows: ConclusionRecord[]
+  generatedAtUtc?: string
+  modelId?: string
+  provider?: string
+}

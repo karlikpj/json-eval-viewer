@@ -1,0 +1,236 @@
+{
+  "evaluated_count": 37,
+  "evaluated_results_by_pmid": {
+    "40600921": {
+      "conclusions_category": "solid_findings_more_research_needed",
+      "conclusions_category_label": "Solid findings but more research is needed in larger populations/different groups",
+      "study_conclusions": "The integrated classification was prognostic for event-free survival in patients treated with TCb+Pem. Integrating sTILs and TNBC-DX may facilitate chemoimmunotherapy escalation and de-escalation trials."
+    },
+    "40752655": {
+      "conclusions_category": "clear_findings_ready_for_implementation",
+      "conclusions_category_label": "Clear, clinically relevant findings ready for implementation in one or more subgroups",
+      "study_conclusions": "The boost significantly increased grade \u22652 BSCF occurrence and persistent breast symptoms."
+    },
+    "40780546": {
+      "conclusions_category": "solid_findings_more_research_needed",
+      "conclusions_category_label": "Solid findings but more research is needed in larger populations/different groups",
+      "study_conclusions": "Dysphagia was less with the 1-week RT schedule as compared to the 2-week schedule. The trial showed the safety and tolerability of a 1-week regional nodal irradiation course and provided toxicity rates that will help future studies in sample size calculations."
+    },
+    "41075163": {
+      "conclusions_category": "solid_findings_more_research_needed",
+      "conclusions_category_label": "Solid findings but more research is needed in larger populations/different groups",
+      "study_conclusions": "Visual examination TILs and computational assessment CmbI were each associated with response to neoadjuvant chemotherapy in triple-negative breast cancer in the overall cohort and the paclitaxel arm. Computational assessment CmbI did not outperform visual assessment. Further validation is needed before clinical implementation of computational approaches."
+    },
+    "41360078": {
+      "conclusions_category": "actionable_findings_system_changes_needed",
+      "conclusions_category_label": "Actionable findings but infrastructure/health system changes may be needed",
+      "study_conclusions": "Black women experienced higher early symptoms during adjuvant endocrine therapy. Although perceived discrimination was associated with greater symptom burden, it did not clinically or statistically significantly explain Black-White differences in symptoms. Income explained the largest portion of Black-White symptom differences. Addressing income inequality is essential for equitable symptom management."
+    },
+    "41365333": {
+      "conclusions_category": "clear_findings_ready_for_implementation",
+      "conclusions_category_label": "Clear, clinically relevant findings ready for implementation in one or more subgroups",
+      "study_conclusions": "Adding carboplatin to adjuvant EC\u2011T chemotherapy significantly improves DFS, DDFS, and OS in patients with early\u2011stage TNBC. Although increased hematologic toxicity was observed, no new safety signals emerged."
+    },
+    "41370190": {
+      "conclusions_category": "solid_findings_more_research_needed",
+      "conclusions_category_label": "Solid findings but more research is needed in larger populations/different groups",
+      "study_conclusions": "Patients with HR+HER2- ABC showed impaired cognitive function at initial diagnosis compared to cancer\u2011free controls. During first\u2011line endocrine treatment with aromatase inhibitors, cognitive function declined in a small group of patients, regardless of the addition of CDK4/6i."
+    },
+    "41378685": {
+      "conclusions_category": "solid_findings_more_research_needed",
+      "conclusions_category_label": "Solid findings but more research is needed in larger populations/different groups",
+      "study_conclusions": "The addition of pembrolizumab to neoadjuvant CRT followed by surgical resection was overall well-tolerated and resulted in numerically higher rates of pCR compared to historical controls. Further studies with optimized patient selection are warranted to validate the efficacy of this treatment paradigm."
+    },
+    "41379459": {
+      "conclusions_category": "solid_findings_more_research_needed",
+      "conclusions_category_label": "Solid findings but more research is needed in larger populations/different groups",
+      "study_conclusions": "This secondary analysis of the RxPONDER found that CET had a greater negative association with patient-reported CRCI compared to ET alone in both pre- and postmenopausal participants over a 36-month follow-up period. Interventions to prevent or treat CRCI are needed to improve the long-term quality of life of these patients treated with chemotherapy."
+    },
+    "41385349": {
+      "conclusions_category": "solid_findings_more_research_needed",
+      "conclusions_category_label": "Solid findings but more research is needed in larger populations/different groups",
+      "study_conclusions": "Risk-based breast cancer screening that includes population-based genetic testing safely stratified risk and screening intensity, but did not reduce biopsy rates."
+    },
+    "41385405": {
+      "conclusions_category": "solid_findings_more_research_needed",
+      "conclusions_category_label": "Solid findings but more research is needed in larger populations/different groups",
+      "study_conclusions": "In the post-TAILORx era, younger age was associated with substantially more ODX testing. The association of testing with chemotherapy varied substantially by age. The impact of age on ODX testing and use of chemotherapy is substantial and warrants further study."
+    },
+    "41389946": {
+      "conclusions_category": "clear_findings_ready_for_implementation",
+      "conclusions_category_label": "Clear, clinically relevant findings ready for implementation in one or more subgroups",
+      "study_conclusions": "Oligometastatic breast cancer is a very heterogeneous group of patients. This study demonstrates excellent outcomes in treatment\u2011na\u00efve, bone\u2011only metastatic patients, emphasizing the need for patient selection. This finding underscores the critical importance of careful patient stratification and selection to achieve optimal therapeutic efficacy."
+    },
+    "41436191": {
+      "conclusions_category": "clear_findings_ready_for_implementation",
+      "conclusions_category_label": "Clear, clinically relevant findings ready for implementation in one or more subgroups",
+      "study_conclusions": "The addition of carboplatin to adjuvant anthracycline/taxane based chemotherapy significantly improved survival outcomes in patients with high risk, early stage, triple negative breast cancer, driven by reduction of early recurrence risk without new safety concerns."
+    },
+    "41449148": {
+      "conclusions_category": "solid_findings_more_research_needed",
+      "conclusions_category_label": "Solid findings but more research is needed in larger populations/different groups",
+      "study_conclusions": "Overall, these results do not support ALND for all patients with ypN1mi on sentinel lymph node biopsy treated with nodal radiotherapy; however, tumour biology should be taken into account when considering ALND omission."
+    },
+    "41453455": {
+      "conclusions_category": "solid_findings_more_research_needed",
+      "conclusions_category_label": "Solid findings but more research is needed in larger populations/different groups",
+      "study_conclusions": "In this single-institution trial, FSRT delivered in 3 to 5 fractions of 8 Gy each for breast cancer brain metastases yielded high local control with low rates of radiation necrosis in the background of modern systemic treatment."
+    },
+    "41457414": {
+      "conclusions_category": "solid_findings_more_research_needed",
+      "conclusions_category_label": "Solid findings but more research is needed in larger populations/different groups",
+      "study_conclusions": "After menopause, obesity was associated with elevated breast cancer risk, which was further increased by metabolic syndrome. In contrast, no elevated risk was observed before menopause. The current findings highlight differences in breast cancer risk by menopausal status across metabolic obesity phenotypes, emphasizing the need for targeted prevention strategies and further research into underlying mechanisms."
+    },
+    "41485117": {
+      "conclusions_category": "actionable_findings_system_changes_needed",
+      "conclusions_category_label": "Actionable findings but infrastructure/health system changes may be needed",
+      "study_conclusions": "ctDNA dynamics predicted progression and may guide treatment or imaging. ctDNA offers a minimally invasive, cost-effective adjunct to radiographic surveillance."
+    },
+    "41538747": {
+      "conclusions_category": "solid_findings_more_research_needed",
+      "conclusions_category_label": "Solid findings but more research is needed in larger populations/different groups",
+      "study_conclusions": "In this cohort study analysis, extending ET in premenopausal patients with node-positive eBC after 5 years of LHRHa treatment was associated with a clinically meaningful reduction in both invasive and distant breast cancer recurrences."
+    },
+    "41562542": {
+      "conclusions_category": "actionable_findings_system_changes_needed",
+      "conclusions_category_label": "Actionable findings but infrastructure/health system changes may be needed",
+      "study_conclusions": "HER2 expression levels (low/ultralow/null) stratify prognosis in HER2-negative eBC. The dynamic evolution of HER2 status following NAC and its prognostic utility highlights the importance of reassessing HER2 status in residual disease in HER2-negative eBC."
+    },
+    "41564379": {
+      "conclusions_category": "clear_findings_ready_for_implementation",
+      "conclusions_category_label": "Clear, clinically relevant findings ready for implementation in one or more subgroups",
+      "study_conclusions": "This large prospective analysis of patients with initially clinically node-positive BC receiving NACT demonstrates that probe-guided detection markers used to mark metastatic nodes before NACT provide superior detection rates."
+    },
+    "41564397": {
+      "conclusions_category": "clear_findings_ready_for_implementation",
+      "conclusions_category_label": "Clear, clinically relevant findings ready for implementation in one or more subgroups",
+      "study_conclusions": "Sacituzumab govitecan plus pembrolizumab led to significantly longer progression-free survival than chemotherapy plus pembrolizumab among patients with previously untreated, PD-L1-positive, advanced triple-negative breast cancer."
+    },
+    "41604601": {
+      "conclusions_category": "clear_findings_ready_for_implementation",
+      "conclusions_category_label": "Clear, clinically relevant findings ready for implementation in one or more subgroups",
+      "study_conclusions": "Olaparib is active in pts with MBC with gPALB2m and sBRCAm, significantly expanding the population of pts with breast cancer likely to benefit from PARP inhibitors beyond gBRCA1/2m carriers."
+    },
+    "41604639": {
+      "conclusions_category": "clear_findings_ready_for_implementation",
+      "conclusions_category_label": "Clear, clinically relevant findings ready for implementation in one or more subgroups",
+      "study_conclusions": "The addition of palbociclib to maintenance anti-HER2 and endocrine therapies led to a significant improvement in progression-free survival over standard therapy, with increased toxic effects, mainly neutropenia."
+    },
+    "41628308": {
+      "conclusions_category": "solid_findings_more_research_needed",
+      "conclusions_category_label": "Solid findings but more research is needed in larger populations/different groups",
+      "study_conclusions": "SERENA-3 demonstrates that camizestrant 75 mg once daily (Phase III dose) is well-tolerated and achieves maximal reduction in ER through known mechanisms, that is, antagonism and degradation, by 5-7 days, and proliferation suppression determined by Ki67 expression, by 12-15 days. These data support camizestrant 75 mg once daily as the preferred dose for ongoing clinical development and highlight the importance of presurgical WOO studies in guiding dose selection."
+    },
+    "41629673": {
+      "conclusions_category": "clear_findings_ready_for_implementation",
+      "conclusions_category_label": "Clear, clinically relevant findings ready for implementation in one or more subgroups",
+      "study_conclusions": "These findings demonstrate markedly improved PRS accuracy for BC risk prediction in African-ancestry women. Using these PRS models for screening will help promote more equitable cancer prevention efforts."
+    },
+    "41656998": {
+      "conclusions_category": "solid_findings_more_research_needed",
+      "conclusions_category_label": "Solid findings but more research is needed in larger populations/different groups",
+      "study_conclusions": "Associations between historical redlining and breast cancer survival have changed over time, with disparities generally narrowing. Results stratified by stage and hormone receptor status suggest that such disparities reflect differential access to advances in breast cancer treatment across time."
+    },
+    "41669989": {
+      "conclusions_category": "no_meaningful_findings_more_research_needed",
+      "conclusions_category_label": "No meaningful findings, more research is needed",
+      "study_conclusions": "Improved knowledge was not demonstrate with a web-based DA versus UC. Interestingly, the DA was associated with a higher likelihood of feeling informed. Future research will explore the discrepancy between patients feeling informed but having low knowledge, especially for disadvantaged patients."
+    },
+    "41689305": {
+      "conclusions_category": "clear_findings_ready_for_implementation",
+      "conclusions_category_label": "Clear, clinically relevant findings ready for implementation in one or more subgroups",
+      "study_conclusions": "Prognostic stage significantly influences survival among patients with low RS. RS\u00a0<\u00a011 alone should not automatically downstage patients to PPS IA; anatomic and other nongenomic factors remain important for prognosis."
+    },
+    "41689775": {
+      "conclusions_category": "clear_findings_ready_for_implementation",
+      "conclusions_category_label": "Clear, clinically relevant findings ready for implementation in one or more subgroups",
+      "study_conclusions": "Single-dye SLNB after NAT in patients initially diagnosed with cN1 breast cancer yielded a clinically acceptable FNR. When four or more SLNs were identified, an additional benefit was observed in patients who had a BMI <25 kg/m2 and negative estrogen receptor status."
+    },
+    "41701617": {
+      "conclusions_category": "solid_findings_more_research_needed",
+      "conclusions_category_label": "Solid findings but more research is needed in larger populations/different groups",
+      "study_conclusions": "Building on this study's methodology and its findings about the effectiveness of long-standing approaches to TNBC management, additional population-based studies are urgently needed as new therapeutic approaches are being integrated into guidelines and clinical practice."
+    },
+    "41713473": {
+      "conclusions_category": "solid_findings_more_research_needed",
+      "conclusions_category_label": "Solid findings but more research is needed in larger populations/different groups",
+      "study_conclusions": "MRI-guided optimisation of neoadjuvant chemotherapy duration was associated with favourable 3-year event-free survival outcomes in patients with stage II-III HER2-positive breast cancer. This approach represents a novel strategy that reduces treatment burden, minimises toxicity, and preserves quality of life in a subset of patients with early HER2-positive breast cancer."
+    },
+    "41722967": {
+      "conclusions_category": "actionable_findings_system_changes_needed",
+      "conclusions_category_label": "Actionable findings but infrastructure/health system changes may be needed",
+      "study_conclusions": "Adjunctive ultrasonography reduced the cumulative incidence of advanced breast cancer in women aged 40-49 years. These findings highlight the potential value of integrating adjunctive ultrasonography into screening programmes for women with dense breast tissue, particularly in Asian populations, and could inform future breast cancer screening guidelines."
+    },
+    "41732900": {
+      "conclusions_category": "solid_findings_more_research_needed",
+      "conclusions_category_label": "Solid findings but more research is needed in larger populations/different groups",
+      "study_conclusions": "Early dosing decisions shaped subsequent chemotherapy delivery. Most patients who began at full dose maintained consistent dosing, whereas early reductions did not stave off subsequent changes, underscoring the need to balance safety with adequate dose intensity."
+    },
+    "41794436": {
+      "conclusions_category": "clear_findings_ready_for_implementation",
+      "conclusions_category_label": "Clear, clinically relevant findings ready for implementation in one or more subgroups",
+      "study_conclusions": "3-week radiotherapy (40\u202fGy in 15 fractions) was found to be non-inferior to 5-week radiotherapy (50\u202fGy in 25 fractions) for arm lymphoedema risk and was comparably safe regarding other late normal tissue effects for patients prescribed locoregional radiotherapy for early-breast cancer."
+    },
+    "41808563": {
+      "conclusions_category": "solid_findings_more_research_needed",
+      "conclusions_category_label": "Solid findings but more research is needed in larger populations/different groups",
+      "study_conclusions": "Breast cancer chemotherapy regimens used in the real-world setting were examined. Chemotherapy modifications varied markedly by regimen and by characteristics of the regimen administered. Given that more than one in three women in this cohort did not receive chemotherapy as intended, these novel findings may be informative in treatment planning and for future research assessing real-world treatment effectiveness."
+    },
+    "41819560": {
+      "conclusions_category": "solid_findings_more_research_needed",
+      "conclusions_category_label": "Solid findings but more research is needed in larger populations/different groups",
+      "study_conclusions": "Initial treatment with camrelizumab plus CAPOX followed by camrelizumab based maintenance was associated with longer overall survival than CAPOX alone in human epidermal growth factor receptor 2 (HER2) negative, unresectable, locally advanced or metastatic gastric or gastro-oesophageal junction adenocarcinoma. Exploratory comparisons between the two camrelizumab based regimens showed no additional survival benefit, with higher rates of treatment related adverse events of grade \u22653 and treatment discontinuations when apatinib was added during maintenance."
+    },
+    "41839514": {
+      "conclusions_category": "clear_findings_ready_for_implementation",
+      "conclusions_category_label": "Clear, clinically relevant findings ready for implementation in one or more subgroups",
+      "study_conclusions": "The updated analysis of the phase 3 PHILA trial confirmed the superiority of pyrotinib in combination with trastuzumab and docetaxel over placebo in combination with trastuzumab and docetaxel in sustaining longer progression-free survival and improving overall survival for initial treatment of HER2 positive metastatic breast cancer. The safety profile remained consistent with interim findings, with no new safety signals identified during extended follow-up. This analysis reinforces the efficacy of this dual anti-HER2 (pyrotinib plus trastuzumab) regimen as an effective treatment strategy for this patient population."
+    }
+  },
+  "generated_at_utc": "2026-04-24T14:55:28.830505+00:00",
+  "model": {
+    "model_id": "openai/gpt-oss-120b",
+    "provider": "openrouter"
+  },
+  "pmids_requested": [
+    40780546,
+    41075163,
+    41839514,
+    40600921,
+    40752655,
+    41360078,
+    41365333,
+    41370190,
+    41378685,
+    41379459,
+    41385349,
+    41385405,
+    41389946,
+    41436191,
+    41449148,
+    41453455,
+    41457414,
+    41485117,
+    41538747,
+    41562542,
+    41564379,
+    41564397,
+    41604601,
+    41604639,
+    41628308,
+    41629673,
+    41656998,
+    41669989,
+    41689305,
+    41689775,
+    41701617,
+    41713473,
+    41722967,
+    41732900,
+    41794436,
+    41808563,
+    41819560
+  ],
+  "skipped_count": 0,
+  "skipped_pmids": {}
+}

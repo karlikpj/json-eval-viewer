@@ -1,11 +1,16 @@
 import { useState, useCallback } from 'react'
-import type  { TestRun } from './types'
+import type { ConclusionSummary, TestRun } from './types'
+import ConclusionsViewer from './components/ConclusionsViewer'
 import DropZone from './components/DropZone'
 import Viewer from './components/Viewer'
-import { parseTestRun, toErrorMessage } from './utils/json'
+import { parseConclusionSummary, parseTestRun, toErrorMessage } from './utils/json'
+
+type LoadedData =
+  | { kind: 'test-run'; data: TestRun }
+  | { kind: 'conclusion-summary'; data: ConclusionSummary }
 
 export default function App() {
-  const [data, setData] = useState<TestRun | null>(null)
+  const [data, setData] = useState<LoadedData | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -23,11 +28,21 @@ export default function App() {
         const json: unknown = JSON.parse(rawText)
         const testRun = parseTestRun(json)
 
-        if (!testRun) {
-          throw new Error('No valid testCases found in file')
+        if (testRun) {
+          setData({ kind: 'test-run', data: testRun })
+          return
         }
 
-        setData(testRun)
+        const conclusionSummary = parseConclusionSummary(json, rawText)
+
+        if (conclusionSummary) {
+          setData({ kind: 'conclusion-summary', data: conclusionSummary })
+          return
+        }
+
+        throw new Error(
+          'Unsupported JSON format. Upload either an eval test-run file with testCases or a conclusions summary file with evaluated_results_by_pmid.'
+        )
       } catch (error) {
         setError(toErrorMessage(error))
       } finally {
@@ -37,7 +52,18 @@ export default function App() {
     reader.readAsText(file)
   }, [])
 
-  if (data) return <Viewer data={data} onReset={() => setData(null)} />
+  const handleReset = useCallback(() => {
+    setData(null)
+    setError(null)
+  }, [])
+
+  if (data?.kind === 'test-run') {
+    return <Viewer data={data.data} onReset={handleReset} />
+  }
+
+  if (data?.kind === 'conclusion-summary') {
+    return <ConclusionsViewer data={data.data} onReset={handleReset} />
+  }
 
   return <DropZone onFile={handleFile} loading={loading} error={error} />
 }

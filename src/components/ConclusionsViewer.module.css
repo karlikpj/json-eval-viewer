@@ -1,0 +1,26 @@
+.tableWrap {
+  overflow-x: auto;
+}
+
+.table {
+  min-width: 760px;
+}
+
+.idCell {
+  width: 100px;
+  white-space: nowrap;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.conclusionCell {
+  min-width: 420px;
+  line-height: 1.45;
+  color: #334155;
+}
+
+.categoryCell {
+  min-width: 280px;
+  line-height: 1.4;
+  color: #475569;
+}
