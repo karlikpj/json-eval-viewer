@@ -54,8 +54,12 @@ export default function CaseDetail({ c }: { c: TestCase }) {
   const len = Math.max(aEPs.length, eEPs.length)
   const actualStudyConclusions = getPath(actual, 'pico_elements.outcomes.study_conclusions')
   const expectedStudyConclusions = getPath(expected, 'pico_elements.outcomes.study_conclusions')
-  const studyConclusionsMatch =
-    valStr(actualStudyConclusions) === valStr(expectedStudyConclusions)
+  const actualConclusionsCategory = getPath(actual, 'pico_elements.outcomes.conclusions_category')
+  const expectedConclusionsCategory = getPath(expected, 'pico_elements.outcomes.conclusions_category')
+  const studyConclusionRows: [string, JsonValue | undefined, JsonValue | undefined][] = [
+    ['Study Conclusions', actualStudyConclusions, expectedStudyConclusions],
+    ['Conclusions Category', actualConclusionsCategory, expectedConclusionsCategory],
+  ]
 
   return (
     <div>
@@ -148,15 +152,24 @@ export default function CaseDetail({ c }: { c: TestCase }) {
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Study Conclusions</h2>
         <table className={styles.table}>
-          <thead><tr><th>Actual</th><th>Expected</th><th></th></tr></thead>
-          <tbody><tr className={studyConclusionsMatch ? '' : styles.diffRow}>
-            <td>{codeCell(actualStudyConclusions)}</td>
-            <td>{codeCell(expectedStudyConclusions)}</td>
-            <td>{studyConclusionsMatch
-              ? <span className={styles.ok}>✓</span>
-              : <span className={styles.bad}>✗</span>}
-            </td>
-          </tr></tbody>
+          <thead><tr><th>Field</th><th>Actual</th><th>Expected</th><th></th></tr></thead>
+          <tbody>
+            {studyConclusionRows.map(([label, actualValue, expectedValue]) => {
+              const match = valStr(actualValue) === valStr(expectedValue)
+
+              return (
+                <tr key={label} className={match ? '' : styles.diffRow}>
+                  <td style={{ fontWeight: 500, whiteSpace: 'nowrap' }}>{label}</td>
+                  <td>{codeCell(actualValue)}</td>
+                  <td>{codeCell(expectedValue)}</td>
+                  <td>{match
+                    ? <span className={styles.ok}>✓</span>
+                    : <span className={styles.bad}>✗</span>}
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
         </table>
       </div>
 
