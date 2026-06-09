@@ -4,6 +4,7 @@ import type {
   JsonObject,
   JsonValue,
   Metric,
+  MetricSummary,
   TestCase,
   TestRun,
 } from '../types'
@@ -52,6 +53,11 @@ export function parseTestRun(value: unknown): TestRun | null {
   return {
     testFile: typeof candidate.testFile === 'string' ? candidate.testFile : '',
     testCases,
+    metricsScores: Array.isArray(candidate.metricsScores)
+      ? candidate.metricsScores
+          .map(toMetricSummary)
+          .filter((metricSummary: MetricSummary | null): metricSummary is MetricSummary => metricSummary !== null)
+      : [],
     testPassed,
     testFailed: testCases.length - testPassed,
   }
@@ -119,6 +125,24 @@ function toMetric(value: unknown): Metric | null {
     score: typeof value.score === 'number' ? value.score : 0,
     reason: typeof value.reason === 'string' ? value.reason : '',
     threshold: typeof value.threshold === 'number' ? value.threshold : 0,
+    strictMode: typeof value.strictMode === 'boolean' ? value.strictMode : undefined,
+    evaluationCost: typeof value.evaluationCost === 'number' ? value.evaluationCost : undefined,
+  }
+}
+
+function toMetricSummary(value: unknown): MetricSummary | null {
+  if (!isJsonObject(value) || typeof value.metric !== 'string') {
+    return null
+  }
+
+  return {
+    metric: value.metric,
+    scores: Array.isArray(value.scores)
+      ? value.scores.filter((score): score is number => typeof score === 'number' && Number.isFinite(score))
+      : [],
+    passes: typeof value.passes === 'number' ? value.passes : 0,
+    fails: typeof value.fails === 'number' ? value.fails : 0,
+    errors: typeof value.errors === 'number' ? value.errors : 0,
   }
 }
 

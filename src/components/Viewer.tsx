@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import type  { TestRun } from '../types'
+import type { TestRun } from '../types'
 import CaseDetail from './CaseDetail'
 import styles from './Viewer.module.css'
+import { averageMetricScores, parseMetricName } from '../utils/metrics'
 
 type Filter = 'all' | 'pass' | 'fail'
 
@@ -62,6 +63,53 @@ export default function Viewer({ data, onReset }: Props) {
       </div>
 
       <main className={styles.main}>
+        {data.metricsScores.length > 0 && (
+          <section className={styles.section}>
+            <h2 className={styles.sectionTitle}>Metrics Summary</h2>
+            <table className={styles.table}>
+              <thead>
+                <tr>
+                  <th>Field</th>
+                  <th>Metric Type</th>
+                  <th>Average Score</th>
+                  <th>Passes</th>
+                  <th>Fails</th>
+                  <th>Errors</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.metricsScores.map(summary => {
+                  const metric = parseMetricName(summary.metric)
+                  const averageScore = averageMetricScores(summary.scores)
+                  const averageScoreLabel =
+                    averageScore === null ? '—' : `${Math.round(averageScore * 1000) / 10}%`
+                  const familyClassName =
+                    metric.familyKey === 'ExactMatch'
+                      ? styles.metricFamilyExact
+                      : metric.familyKey === 'JsonFieldSemanticComparator'
+                        ? styles.metricFamilySemantic
+                        : styles.metricFamilyNeutral
+
+                  return (
+                    <tr key={summary.metric}>
+                      <td className={styles.metricPath}>{metric.targetPath ?? metric.rawName}</td>
+                      <td>
+                        <span className={`${styles.metricFamily} ${familyClassName}`}>
+                          {metric.familyLabel}
+                        </span>
+                      </td>
+                      <td className={styles.metricNumber}>{averageScoreLabel}</td>
+                      <td className={styles.metricNumber}>{summary.passes}</td>
+                      <td className={styles.metricNumber}>{summary.fails}</td>
+                      <td className={styles.metricNumber}>{summary.errors}</td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          </section>
+        )}
+
         {sel && <CaseDetail c={sel} />}
       </main>
     </div>

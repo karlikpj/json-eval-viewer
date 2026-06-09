@@ -1,6 +1,7 @@
 import type { JsonObject, JsonValue, TestCase } from '../types'
 import styles from './CaseDetail.module.css'
 import { getPath, isJsonObject, parseJsonObject } from '../utils/json'
+import { parseMetricName } from '../utils/metrics'
 
 function valStr(v: JsonValue | undefined): string {
   if (v === null || v === undefined) return '—'
@@ -177,14 +178,27 @@ export default function CaseDetail({ c }: { c: TestCase }) {
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Metrics Detail</h2>
         <table className={styles.table}>
-          <thead><tr><th>Metric</th><th>Result</th><th>Score</th><th>Reason</th></tr></thead>
+          <thead><tr><th>Field</th><th>Metric Type</th><th>Result</th><th>Score</th><th>Reason</th></tr></thead>
           <tbody>
             {c.metricsData.map(m => {
               const pct = Math.round((m.score ?? 0) * 100)
               const barCls = pct >= 90 ? styles.barHigh : pct >= 60 ? styles.barMid : styles.barLow
+              const metric = parseMetricName(m.name)
+              const familyClassName =
+                metric.familyKey === 'ExactMatch'
+                  ? styles.metricFamilyExact
+                  : metric.familyKey === 'JsonFieldSemanticComparator'
+                    ? styles.metricFamilySemantic
+                    : styles.metricFamilyNeutral
+
               return (
                 <tr key={m.name} className={m.success ? '' : styles.diffRow}>
-                  <td style={{ fontSize: '0.78rem' }}>{m.name.match(/\[([^\]]+)\]/)?.[1]}</td>
+                  <td className={styles.metricPath}>{metric.targetPath ?? metric.rawName}</td>
+                  <td>
+                    <span className={`${styles.metricFamily} ${familyClassName}`}>
+                      {metric.familyLabel}
+                    </span>
+                  </td>
                   <td><span className={`${styles.tag} ${m.success ? styles.tagPass : styles.tagFail}`}>
                     {m.success ? '✓ Pass' : '✗ Fail'}
                   </span></td>

@@ -12,6 +12,16 @@ export interface Metric {
   score: number
   reason: string
   threshold: number
+  strictMode?: boolean
+  evaluationCost?: number
+}
+
+export interface MetricSummary {
+  metric: string
+  scores: number[]
+  passes: number
+  fails: number
+  errors: number
 }
 
 export interface TestCase {
@@ -27,6 +37,7 @@ export interface TestCase {
 export interface TestRun {
   testFile: string
   testCases: TestCase[]
+  metricsScores: MetricSummary[]
   testPassed: number
   testFailed: number
 }
