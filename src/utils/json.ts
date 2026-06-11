@@ -124,7 +124,7 @@ function toMetric(value: unknown): Metric | null {
     success: value.success,
     score: typeof value.score === 'number' ? value.score : 0,
     reason: typeof value.reason === 'string' ? value.reason : '',
-    threshold: typeof value.threshold === 'number' ? value.threshold : 0,
+    threshold: typeof value.threshold === 'number' ? value.threshold : undefined,
     strictMode: typeof value.strictMode === 'boolean' ? value.strictMode : undefined,
     evaluationCost: typeof value.evaluationCost === 'number' ? value.evaluationCost : undefined,
   }
