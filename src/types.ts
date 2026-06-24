@@ -42,6 +42,31 @@ export interface TestRun {
   testFailed: number
 }
 
+export type OverviewBucketKey =
+  | 'metrics'
+  | 'fieldComparison'
+  | 'confidence'
+  | 'primaryEndpoints'
+
+export interface BucketResult {
+  key: OverviewBucketKey
+  label: string
+  matched: number
+  comparable: number
+  ratio: number | null
+  passed: boolean
+}
+
+export interface CaseOverviewPoint {
+  caseKey: string
+  caseName: string
+  success: boolean
+  passedBucketCount: number
+  averageMetricScore: number
+  hasMetricScores: boolean
+  buckets: Record<OverviewBucketKey, BucketResult>
+}
+
 export interface ConclusionRecord {
   id: string
   studyConclusions: string

@@ -1,31 +1,54 @@
 import { useState } from 'react'
 import type { TestRun } from '../types'
 import CaseDetail from './CaseDetail'
+import EvalScatterPlot from './EvalScatterPlot'
 import styles from './Viewer.module.css'
 import { averageMetricScores, parseMetricName } from '../utils/metrics'
+import { buildCaseOverviewPoint, getCaseKey } from '../utils/evalAnalysis'
 
 type Filter = 'all' | 'pass' | 'fail'
 
 function shortName(name: string) {
-  const m = name.match(/\[([^\]]+)\]$/)
-  return m ? m[1] : name.slice(0, 24)
+  const match = name.match(/\[([^\]]+)\]$/)
+  return match ? match[1] : name.slice(0, 24)
 }
 
-interface Props { data: TestRun; onReset: () => void }
+interface Props {
+  data: TestRun
+  onReset: () => void
+}
 
 export default function Viewer({ data, onReset }: Props) {
   const [filter, setFilter] = useState<Filter>('all')
-  const [idx, setIdx] = useState(0)
+  const [selectedCaseKey, setSelectedCaseKey] = useState<string | null>(() => getCaseKey(data.testCases[0]))
 
-  const filtered = data.testCases.filter(c =>
-    filter === 'all' ? true : filter === 'pass' ? c.success : !c.success
-  )
-  const sel = filtered[idx] ?? filtered[0]
+  const filteredEntries = data.testCases
+    .filter(testCase => (filter === 'all' ? true : filter === 'pass' ? testCase.success : !testCase.success))
+    .map(testCase => ({
+      caseData: testCase,
+      caseKey: getCaseKey(testCase),
+      overview: buildCaseOverviewPoint(testCase),
+    }))
+  const selectedEntry =
+    filteredEntries.find(entry => entry.caseKey === selectedCaseKey) ?? filteredEntries[0] ?? null
+  const activeCaseKey = selectedEntry?.caseKey ?? null
 
-  const passCount = data.testCases.filter(c => c.success).length
+  const passCount = data.testCases.filter(testCase => testCase.success).length
   const failCount = data.testCases.length - passCount
 
-  const setF = (f: Filter) => { setFilter(f); setIdx(0) }
+  function handleFilterChange(nextFilter: Filter) {
+    const nextEntries = data.testCases
+      .filter(testCase => (
+        nextFilter === 'all' ? true : nextFilter === 'pass' ? testCase.success : !testCase.success
+      ))
+      .map(testCase => getCaseKey(testCase))
+
+    if (!nextEntries.includes(selectedCaseKey ?? '')) {
+      setSelectedCaseKey(nextEntries[0] ?? null)
+    }
+
+    setFilter(nextFilter)
+  }
 
   return (
     <div className={styles.shell}>
@@ -39,27 +62,41 @@ export default function Viewer({ data, onReset }: Props) {
 
       <nav className={styles.nav}>
         <span className={styles.filterLabel}>Filter:</span>
-        {(['all', 'pass', 'fail'] as Filter[]).map(f => (
-          <button key={f}
-            className={`${styles.filterBtn} ${filter === f ? styles.active : ''} ${styles[f]}`}
-            onClick={() => setF(f)}>
-            {f === 'all' ? `All (${data.testCases.length})`
-              : f === 'pass' ? `Pass (${passCount})`
+        {(['all', 'pass', 'fail'] as Filter[]).map(value => (
+          <button
+            key={value}
+            className={`${styles.filterBtn} ${filter === value ? styles.active : ''} ${styles[value]}`}
+            onClick={() => handleFilterChange(value)}
+          >
+            {value === 'all' ? `All (${data.testCases.length})`
+              : value === 'pass' ? `Pass (${passCount})`
               : `Fail (${failCount})`}
           </button>
         ))}
       </nav>
 
+      <section className={styles.overview}>
+        <EvalScatterPlot
+          points={filteredEntries.map(entry => entry.overview)}
+          selectedCaseKey={activeCaseKey}
+          onSelectCase={setSelectedCaseKey}
+        />
+      </section>
+
       <div className={styles.pills}>
-        {filtered.map((c, i) => (
-          <button key={c.name}
-            className={`${styles.pill} ${c.success ? styles.pillPass : styles.pillFail} ${i === idx ? styles.pillSelected : ''}`}
-            onClick={() => setIdx(i)}
-            title={c.name}>
-            {shortName(c.name)}
+        {filteredEntries.map(entry => (
+          <button
+            key={entry.caseKey}
+            className={`${styles.pill} ${entry.caseData.success ? styles.pillPass : styles.pillFail} ${entry.caseKey === activeCaseKey ? styles.pillSelected : ''}`}
+            onClick={() => setSelectedCaseKey(entry.caseKey)}
+            title={entry.caseData.name}
+          >
+            {shortName(entry.caseData.name)}
           </button>
         ))}
-        {filtered.length === 0 && <span style={{ color: '#94a3b8', fontSize: '0.85rem' }}>No cases match.</span>}
+        {filteredEntries.length === 0 && (
+          <span style={{ color: '#94a3b8', fontSize: '0.85rem' }}>No cases match.</span>
+        )}
       </div>
 
       <main className={styles.main}>
@@ -110,7 +147,7 @@ export default function Viewer({ data, onReset }: Props) {
           </section>
         )}
 
-        {sel && <CaseDetail c={sel} />}
+        {selectedEntry && <CaseDetail c={selectedEntry.caseData} />}
       </main>
     </div>
   )

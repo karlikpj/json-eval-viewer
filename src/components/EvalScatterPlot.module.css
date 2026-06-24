@@ -1,0 +1,277 @@
+.shell {
+  background: #ffffff;
+  border: 1px solid #dbe4ef;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.kicker {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+
+.subtle {
+  font-size: 0.82rem;
+  color: #64748b;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.legendItem,
+.legendInfo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  color: #334155;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.legendInfo {
+  color: #475569;
+}
+
+.legendSwatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.legendPass {
+  background: #15803d;
+}
+
+.legendFail {
+  background: #b91c1c;
+}
+
+.frame {
+  position: relative;
+  min-height: 320px;
+  height: clamp(320px, 38vw, 420px);
+}
+
+.chart {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.chartBg {
+  fill: url(#scatter-bg);
+}
+
+.gridLine {
+  stroke: rgba(100, 116, 139, 0.22);
+  stroke-width: 1;
+}
+
+.columnLine {
+  stroke: rgba(59, 130, 246, 0.12);
+  stroke-width: 1;
+  stroke-dasharray: 6 6;
+}
+
+.axisLine {
+  stroke: #94a3b8;
+  stroke-width: 1.25;
+}
+
+.tickText {
+  fill: #64748b;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.axisLabel {
+  fill: #475569;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.point {
+  cursor: pointer;
+}
+
+.pointCircle {
+  stroke: rgba(255, 255, 255, 0.94);
+  stroke-width: 2.5;
+}
+
+.pointPass {
+  fill: #15803d;
+}
+
+.pointFail {
+  fill: #b91c1c;
+}
+
+.pointRing {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 2;
+  transition: stroke 140ms ease, stroke-width 140ms ease;
+}
+
+.pointRingSelected {
+  stroke: rgba(15, 23, 42, 0.3);
+  stroke-width: 3.5;
+}
+
+.point:focus-visible {
+  outline: none;
+}
+
+.point:hover .pointRing,
+.point:focus-visible .pointRing {
+  stroke: rgba(15, 23, 42, 0.22);
+  stroke-width: 3.5;
+}
+
+.pointLabel {
+  fill: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  dominant-baseline: middle;
+  pointer-events: none;
+}
+
+.tooltip {
+  position: absolute;
+  min-width: 260px;
+  max-width: 320px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.96);
+  color: #ffffff;
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.25);
+  pointer-events: none;
+  transform: translate(-50%, calc(-100% - 14px));
+  z-index: 2;
+}
+
+.tooltipBelow {
+  transform: translate(-50%, 16px);
+}
+
+.tooltipHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.tooltipName {
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.tooltipPass,
+.tooltipFail {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.tooltipPass {
+  background: rgba(34, 197, 94, 0.18);
+  color: #bbf7d0;
+}
+
+.tooltipFail {
+  background: rgba(248, 113, 113, 0.18);
+  color: #fecaca;
+}
+
+.tooltipMeta {
+  font-size: 0.76rem;
+  color: #cbd5e1;
+  margin-bottom: 4px;
+}
+
+.tooltipList {
+  display: grid;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.tooltipRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.75rem;
+}
+
+.emptyState {
+  height: 100%;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed #cbd5e1;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+  color: #64748b;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+@media (max-width: 780px) {
+  .shell {
+    padding: 14px;
+  }
+
+  .frame {
+    min-height: 300px;
+    height: 340px;
+  }
+
+  .legend {
+    width: 100%;
+  }
+
+  .tooltip {
+    min-width: 220px;
+    max-width: 260px;
+  }
+
+  .tooltipRow {
+    flex-direction: column;
+    gap: 2px;
+  }
+}
